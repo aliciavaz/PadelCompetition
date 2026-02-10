@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GLASS POINT · Pádel con claridad</title>
+  <meta name="description" content="GLASS POINT: el punto donde todo se ve claro. Transparencia y criterio para equipos de pádel." />
+
+  <style>
+    :root{
+      /* Brand */
+      --blue: #1F3C88;        /* azul pista */
+      --blue-2: #162C66;      /* azul más profundo */
+      --white: #FFFFFF;
+      --bg: #F5F7FA;          /* fondo claro */
+      --ink: #1C1C1C;         /* negro reja */
+      --muted: #5B667A;       /* texto secundario */
+      --yellow: #F2E205;      /* bola (accent) */
+
+      /* UI */
+      --radius: 18px;
+      --radius-2: 26px;
+      --shadow: 0 12px 30px rgba(0,0,0,.12);
+      --border: 1px solid rgba(0,0,0,.08);
+      --max: 1024px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    a{ color: inherit; }
+    img{ max-width:100%; display:block; }
+
+    /* Layout helpers */
+    .container{
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+    .stack{ display:flex; flex-direction:column; gap: 18px; }
+    .row{ display:flex; gap: 16px; }
+    .center{ align-items:center; }
+    .between{ justify-content:space-between; }
+    .muted{ color: var(--muted); }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      font-size: 13px;
+      letter-spacing: .2px;
+    }
+    .dot{
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 0 6px rgba(242,226,5,.18);
+      flex: 0 0 auto;
+    }
+
+    /* Header / Hero */
+    header{
+      background: radial-gradient(1200px 500px at 20% 10%, rgba(242,226,5,.12), transparent 50%),
+                  linear-gradient(135deg, var(--blue), var(--blue-2));
+      color: var(--white);
+      padding: 18px 0 26px;
+    }
+    nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      padding: 8px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .brand-mark{
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.10);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .brand-title{
+      font-weight: 800;
+      letter-spacing: .12em;
+      font-size: 14px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .brand-sub{
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .hero{
+      padding: 22px 0 6px;
+    }
+    .hero h1{
+      font-size: clamp(30px, 6.5vw, 52px);
+      line-height: 1.05;
+      margin: 10px 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .hero h2{
+      font-size: clamp(16px, 3.8vw, 20px);
+      font-weight: 500;
+      margin: 0 0 14px;
+      color: rgba(255,255,255,.86);
+    }
+    .hero p{
+      margin: 0 0 18px;
+      color: rgba(255,255,255,.82);
+      max-width: 52ch;
+    }
+    .hero-actions{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn{
+      appearance:none;
+      border:0;
+      border-radius: 999px;
+      padding: 14px 16px;
+      font-weight: 700;
+      cursor:pointer;
+      font-size: 15px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      text-decoration:none;
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+      user-select:none;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      background: var(--yellow);
+      color: #111;
+      box-shadow: 0 12px 22px rgba(0,0,0,.18);
+    }
+    .btn-primary:hover{ background: #fff066; }
+    .btn-secondary{
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      color: rgba(255,255,255,.92);
+    }
+    .btn-secondary:hover{
+      background: rgba(255,255,255,.16);
+    }
+    .small{
+      font-size: 12px;
+      color: rgba(255,255,255,.72);
+      margin-top: 8px;
+    }
+
+    /* Sections */
+    main{ padding: 18px 0 46px; }
+
+    section{ padding: 18px 0; }
+    .card{
+      background: var(--white);
+      border-radius: var(--radius-2);
+      box-shadow: var(--shadow);
+      border: var(--border);
+      padding: 18px;
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+    .card p{ margin: 0; }
+
+    .kicker{
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(31,60,136,.75);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    ul{
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+    .check{
+      width: 18px; height: 18px;
+      border-radius: 6px;
+      background: rgba(31,60,136,.10);
+      border: 1px solid rgba(31,60,136,.18);
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      position: relative;
+    }
+    .check:after{
+      content:"";
+      width: 9px; height: 5px;
+      border-left: 2px solid rgba(31,60,136,.9);
+      border-bottom: 2px solid rgba(31,60,136,.9);
+      transform: rotate(-45deg);
+      margin-top: -1px;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    /* CTA band */
+    .cta-band{
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      color: var(--white);
+      border-radius: var(--radius-2);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+    }
+    .cta-band:before{
+      content:"";
+      position:absolute;
+      inset: -200px -200px auto auto;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle at 30% 30%, rgba(242,226,5,.26), transparent 55%);
+      transform: rotate(8deg);
+    }
+    .cta-band .content{
+      position: relative;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      max-width: 60ch;
+    }
+    .cta-band h3{
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+    }
+    .cta-band p{ margin: 0; color: rgba(255,255,255,.86); }
+
+    /* Form */
+    form{
+      display:grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    label{ font-size: 13px; color: rgba(255,255,255,.85); }
+    input{
+      width:100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      color: var(--white);
+      padding: 12px 12px;
+      outline: none;
+    }
+    input::placeholder{ color: rgba(255,255,255,.65); }
+
+    footer{
+      padding: 26px 0 40px;
+      color: rgba(0,0,0,.55);
+      font-size: 13px;
+    }
+    .footer-card{
+      background: rgba(255,255,255,.7);
+      border: var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      align-items:center;
+    }
+
+    /* Desktop enhancements */
+    @media (min-width: 820px){
+      .hero-actions{ flex-direction: row; align-items:center; }
+      .split{ grid-template-columns: 1fr 1fr; }
+      .card{ padding: 22px; }
+      .cta-band{ padding: 22px; }
+      nav{ padding: 12px 0; }
+      .brand-mark{ width: 44px; height: 44px; border-radius: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav aria-label="Navegación principal">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <!-- ✅ Sustituye esta imagen por tu logo.
+                 Pon tu archivo en la misma carpeta y cambia el src.
+                 Ej: src="glass-point-logo.png" -->
+            <img src="glass-point-logo.png" alt="" />
+          </div>
+          <div style="min-width:0">
+            <div class="brand-title">GLASS POINT</div>
+            <div class="brand-sub">Pádel con claridad</div>
+          </div>
+        </div>
+
+        <a class="btn btn-secondary" href="#cta">Apúntame</a>
+      </nav>
+
+      <section class="hero" aria-label="Presentación">
+        <div class="pill"><span class="dot" aria-hidden="true"></span> Validación con equipos amateur</div>
+
+        <h1>El punto donde todo se ve claro.</h1>
+        <h2>Transparencia y criterio para equipos de pádel.</h2>
+
+        <p>
+          GLASS POINT es un espacio compartido para jugadores y capitanes donde
+          el rendimiento, las decisiones y la evolución del equipo se entienden con claridad.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#cta">Quiero probarlo <span aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary" href="#problema">Ver de qué va</a>
+        </div>
+
+        <div class="small">No hablamos de IA. Hablamos de claridad.</div>
+      </section>
+    </div>
+  </header>
+
+  <main>
+    <div class="container stack">
+
+      <!-- PROBLEMA -->
+      <section id="problema" class="card">
+        <div class="kicker">El problema</div>
+        <h3>En pádel, el problema no es perder partidos.</h3>
+        <p class="muted">
+          Los equipos se rompen cuando falta criterio compartido. Cuando las decisiones no se entienden, aparecen dudas,
+          fricción y sensación de injusticia.
+        </p>
+        <ul>
+          <li><span class="check" aria-hidden="true"></span><span>Nadie entiende las alineaciones.</span></li>
+          <li><span class="check" aria-hidden="true"></span><span>Las parejas cambian sin explicación.</span></li>
+          <li><span class="check" aria-hidden="true"></span><span>Las decisiones parecen opacas o sesgadas.</span></li>
+          <li><span class="check" aria-hidden="true"></span><span>Todo depende de una sola persona.</span></li>
+        </ul>
+      </section>
+
+      <!-- METÁFORA -->
+      <section class="card">
+        <div class="kicker">La idea</div>
+        <h3>El cristal te obliga a mirar antes de decidir.</h3>
+        <p class="muted">
+          En pádel, el cristal no es un obstáculo: te da tiempo, visión y una segunda oportunidad.
+          GLASS POINT nace de esa idea: crear un punto común donde el equipo puede verse, entenderse y decidir mejor.
+        </p>
+      </section>
+
+      <!-- SPLIT: JUGADORES / CAPITANES -->
+      <section class="split" aria-label="Beneficios">
+        <div class="card">
+          <div class="kicker">Para jugadores</div>
+          <h3>Co
